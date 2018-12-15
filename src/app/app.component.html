@@ -1,14 +1,9 @@
-<!--
-  <ul>
-    <li class="text" *ngFor="let item of (items | async)">{{ item.name }}</li>
-  </ul>
--->
 <section class="todoapp">
   <app-header></app-header>
   <ul class="todo-list">
-    <!-- li class completed and editing -->
     <li
       [class.completed]="task.completed"
+      [class.editing]="task.editing"
       *ngFor="let task of (tasks | async); let i = index"
       [attr.data-index]="i"
     >
@@ -19,9 +14,9 @@
           [checked]="task.completed"
           (click)="toggleCompleted(task)"
         />
-        <label>{{ task.name }}</label> <button class="destroy" (click)="delete(task)"></button>
+        <label (dblclick)="task.editing = true;">{{ task.name }}</label> <button class="destroy" (click)="delete(task)"></button>
       </div>
-      <input class="edit" value="Rule the web" />
+      <input #edit class="edit" [value]="task.name" (keyup.enter)="editTask(task, edit)"/>
     </li>
   </ul>
 

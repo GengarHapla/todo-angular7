@@ -27,5 +27,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.service.deleteTask(task.id);
   }
 
+  editTask(task, { value }) {
+    this.service.updateTask(task.id, { name: value });
+    task.editing = false;
+  }
+
   ngOnDestroy() {}
 }
